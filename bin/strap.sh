@@ -3,7 +3,20 @@
 #/ Install development dependencies on macOS.
 set -e
 
+<<<<<<< HEAD:bin/strap.sh
 [[ "$1" = "--debug" || -o xtrace ]] && STRAP_DEBUG="1"
+=======
+STRAP_BASE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null && pwd )"
+echo $STRAP_BASE_PATH
+. "$STRAP_BASE_PATH/commands/common.sh"
+. "$STRAP_BASE_PATH/commands/bundle_brewfile.sh"
+. "$STRAP_BASE_PATH/commands/setup_docker.sh"
+. "$STRAP_BASE_PATH/commands/finish_rbenv_setup.sh"
+. "$STRAP_BASE_PATH/commands/finish_nodenv_setup.sh"
+. "$STRAP_BASE_PATH/commands/setup_puma.sh"
+
+[ "$1" = "--debug" ] && STRAP_DEBUG="1"
+>>>>>>> Update Brewfile:bin/strap
 STRAP_SUCCESS=""
 
 sudo_askpass() {
@@ -400,35 +413,14 @@ if [ -n "$CUSTOM_BREW_COMMAND" ]; then
   logk
 fi
 
-
 # Run post-install dotfiles script
 run_dotfile_scripts script/strap-after-setup
 
-log "Installing Docker..."
-brew cask install docker
-# brew install docker docker-compose docker-machine xhyve docker-machine-driver-xhyve
-log "Succesfully installed Docker."
-
-log "Installing Cisco OpenConnect"
-brew install openconnect
-log "Successfully installed openconnect."
-
-log "Downloading Cisco AnyConnect Package..."
-curl -O https://s3.amazonaws.com/optoro-packages/anyconnect-macosx-i386-3.1.13015-k9.dmg ~/Downloads/.
-log "Successfully dowloaded package."
-
-
-log "Installing Ruby build, Rbenv, Nodenv"
-brew install ruby-build rbenv node-build nodenv
-
-echo 'Make sure to add: eval $(rbenv init -) to your bash config'
-echo 'Make sure to add: eval $(nodenv init -) to your bash config'
-log "Succesfully install ruby-build, rbenv, and node."
-
-log "Installing other dependencies..."
-brew install git mysql56 postgresql mongodb memcached redis imagemagick ghostscript influxdb qt
-brew link --force mysql@5.6
-log "Successfully installed other dependencies!"
+logstep "Bundle Brewfile" bundle_brewfile
+logstep "Setup Puma" setup_puma
+logstep "Setup Docker" setup_docker
+logstep "Finish Rbenv Setup" finish_rbenv_setup
+logstep "Finish Nodenv Setup" finish_nodenv_setup
 
 STRAP_SUCCESS="1"
 log "Your system is now Strap'd!"

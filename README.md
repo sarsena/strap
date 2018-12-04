@@ -1,4 +1,5 @@
 # Strap
+This project has been forked from MikeMcQuaid's Strap.  For more information see [strap](https://github.com/MikeMcQuaid/strap).
 A script to bootstrap a minimal macOS development system. This does not assume you're doing Ruby/Rails/web development but installs the minimal set of software every macOS developer will want.
 
 ## Motivation
@@ -30,13 +31,11 @@ Replacing [Boxen](https://github.com/boxen/boxen/) in [GitHub](https://github.co
 - Add phone number to security screen message (want to avoid prompting users for information on installation)
 
 ## Usage
-Open https://macos-strap.herokuapp.com/ in your web browser.
-
-Instead, to run Strap locally run:
 ```bash
-git clone https://github.com/MikeMcQuaid/strap
+git clone https://github.com/sarsena/strap
 cd strap
-bash bin/strap.sh # or bash bin/strap.sh --debug for more debugging output
+git checkout add-new-dependencies # Branch with updates.
+bash bin/strap # or bash bin/strap --debug for more debugging output
 ```
 
 Instead, to run the web application locally run:
