@@ -14,7 +14,7 @@ echo $STRAP_BASE_PATH
 . "$STRAP_BASE_PATH/commands/setup_puma.sh"
 
 [ "$1" = "--debug" ] && STRAP_DEBUG="1"
->>>>>>> Update Brewfile:bin/strap
+
 STRAP_SUCCESS=""
 
 sudo_askpass() {
@@ -127,10 +127,6 @@ sudo_refresh() {
   reset_debug
 }
 
-abort() { STRAP_STEP="";   echo "!!! $*" >&2; exit 1; }
-log()   { STRAP_STEP="$*"; sudo_refresh; echo "--> $*"; }
-logn()  { STRAP_STEP="$*"; sudo_refresh; printf -- "--> %s " "$*"; }
-logk()  { STRAP_STEP="";   echo "OK"; }
 escape() {
   printf '%s' "${1//\'/\'}"
 }

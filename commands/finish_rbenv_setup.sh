@@ -1,3 +1,3 @@
 finish_rbenv_setup() {
-  rbenv init
+  echo "$(rbenv init)"
 }
